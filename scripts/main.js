@@ -1,0 +1,1 @@
+"use strict";console.log("'Allo 'Allo!");var offerRollover=function(o){$(".lt-"+o).hover(function(){$(this).find(".offer-pic").removeClass("icon-lt_"+o).addClass("icon-lt_offer_rollover")},function(){$(this).find(".offer-pic").addClass("icon-lt_"+o).removeClass("icon-lt_offer_rollover")})};offerRollover("studio"),offerRollover("training"),offerRollover("swat");
