@@ -55,6 +55,17 @@ gulp.task('assemble', function () {
         .pipe(gulp.dest('.tmp/'));
 });
 
+//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//| ✓ sitemap
+//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+gulp.task('sitemap', function () {
+    return gulp.src('.tmp/**/*.html')
+        .pipe($.sitemap({
+            siteUrl: 'http://www.lateral-thoughts.com'
+        }))
+        .pipe(gulp.dest('dist'));
+});
+
 
 //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //| ✓ html
@@ -188,6 +199,7 @@ gulp.task('watch', ['serve'], function () {
     gulp.watch('app/scripts/**/*.js', ['scripts']);
     gulp.watch('app/images/**/*', ['images']);
     gulp.watch('bower.json', ['wiredep']);
+    gulp.watch('.tmp/**/*.html', ['sitemap']);
 });
 
 
@@ -217,7 +229,7 @@ gulp.task('connect', function () {
         });
 });
 
-gulp.task('serve', ['connect', 'styles', 'assemble'], function () {
+gulp.task('serve', ['connect', 'styles', 'assemble', 'sitemap'], function () {
     require('opn')('http://localhost:9000');
 });
 
@@ -225,7 +237,7 @@ gulp.task('serve', ['connect', 'styles', 'assemble'], function () {
 //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //| ✓ Macro tasks
 //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-gulp.task('build', ['images', 'fonts', 'extras', 'html']);
+gulp.task('build', ['images', 'fonts', 'extras', 'html', 'sitemap']);
 
 
 //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
