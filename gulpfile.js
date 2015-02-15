@@ -6,6 +6,7 @@ var gulp = require('gulp');
 var $     = require('gulp-load-plugins')(),
     del   = require('del'),
     mbf   = require('main-bower-files'),
+    merge = require('gulp-merge'),
     gutil = require('gulp-load-utils')(['log']),
     _     = { app: 'app', dist: 'dist' };
 
@@ -44,28 +45,29 @@ gulp.task('scripts', function () {
 //  - pages
 //  - partials
 //  - layouts
-gulp.task('assemble', function () {
-    return gulp.src('app/templates/pages/*.hbs')
+gulp.task('assemble', function (cb) {
+    var others = gulp.src('app/templates/pages/*.hbs')
         .pipe($.plumber())
         .pipe($.assemble({
             data: 'data/*.json',
             partials: 'app/templates/partials/*.hbs',
             layoutdir: 'app/templates/layouts/'
         }).on("error", gutil.log))
-        .pipe(gulp.dest('.tmp/'));
-});
+        .pipe($.debug({title: 'others:'}))
+        .pipe(gulp.dest('.tmp/'));        
 
-//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//| ✓ sitemap
-//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-gulp.task('sitemap', function () {
-    return gulp.src('.tmp/**/*.html')
-        .pipe($.sitemap({
-            siteUrl: 'http://www.lateral-thoughts.com'
-        }))
-        .pipe(gulp.dest('dist'));
-});
+    var formations = gulp.src('app/templates/pages/formations/*.hbs')
+        .pipe($.plumber())
+        .pipe($.assemble({
+            data: 'data/*.json',
+            partials: 'app/templates/partials/*.hbs',
+            layoutdir: 'app/templates/layouts/'
+        }).on("error", gutil.log))
+        .pipe($.debug({title: 'formations:'}))
+        .pipe(gulp.dest('.tmp/formations'));        
 
+    return merge(formations, others);
+});
 
 //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //| ✓ html
@@ -86,7 +88,10 @@ gulp.task('sitemap', function () {
 gulp.task('html', ['styles', 'scripts', 'assemble'], function () {
     var assets = $.useref.assets({searchPath: '{.tmp,app}'})
 
-    return gulp.src('.tmp/*.html')
+    return gulp.src('.tmp/**/*.html')
+        .pipe($.sitemap({
+            siteUrl: 'http://www.lateral-thoughts.com'
+         }))
         .pipe($.plumber())
         .pipe(assets)
         .pipe($.if('*.js', $.uglify()))
@@ -94,6 +99,7 @@ gulp.task('html', ['styles', 'scripts', 'assemble'], function () {
         .pipe(assets.restore())
         .pipe($.useref())
         .pipe($.size())
+        .pipe($.debug({title: 'html:'}))
         .pipe(gulp.dest('dist'));
 });
 
@@ -182,7 +188,7 @@ gulp.task('watch', ['serve'], function () {
 
     // watch for changes
     gulp.watch([
-        '.tmp/*.html',
+        '.tmp/**/*.html',
         '.tmp/styles/**/*.css',
         'app/scripts/**/*.js',
         'app/images/**/*',
@@ -192,14 +198,13 @@ gulp.task('watch', ['serve'], function () {
         server.changed(file.path);
     });
 
-    gulp.watch(['app/templates/pages/*.hbs',
+    gulp.watch(['app/templates/pages/**/*.hbs',
                 'app/templates/layouts/*.hbs',
                 'app/templates/partials/*.hbs'], ['assemble']);
     gulp.watch('app/styles/**/*.less', ['styles']);
     gulp.watch('app/scripts/**/*.js', ['scripts']);
     gulp.watch('app/images/**/*', ['images']);
     gulp.watch('bower.json', ['wiredep']);
-    gulp.watch('.tmp/**/*.html', ['sitemap']);
 });
 
 
@@ -229,7 +234,7 @@ gulp.task('connect', function () {
         });
 });
 
-gulp.task('serve', ['connect', 'styles', 'assemble', 'sitemap'], function () {
+gulp.task('serve', ['connect', 'styles', 'assemble'], function () {
     require('opn')('http://localhost:9000');
 });
 
@@ -237,7 +242,7 @@ gulp.task('serve', ['connect', 'styles', 'assemble', 'sitemap'], function () {
 //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //| ✓ Macro tasks
 //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-gulp.task('build', ['images', 'fonts', 'extras', 'html', 'sitemap']);
+gulp.task('build', ['images', 'fonts', 'extras', 'html']);
 
 
 //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
