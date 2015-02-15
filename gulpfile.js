@@ -45,8 +45,10 @@ gulp.task('scripts', function () {
 //  - pages
 //  - partials
 //  - layouts
-gulp.task('assemble', function (cb) {
-    var others = gulp.src('app/templates/pages/*.hbs')
+gulp.task('assemble', ["others", "formations"]);
+
+gulp.task('others', function (cb) {
+    return gulp.src('app/templates/pages/*.hbs')
         .pipe($.plumber())
         .pipe($.assemble({
             data: 'data/*.json',
@@ -55,8 +57,10 @@ gulp.task('assemble', function (cb) {
         }).on("error", gutil.log))
         .pipe($.debug({title: 'others:'}))
         .pipe(gulp.dest('.tmp/'));        
+});
 
-    var formations = gulp.src('app/templates/pages/formations/*.hbs')
+gulp.task('formations', function (cb) {
+    return gulp.src('app/templates/pages/formations/*.hbs')
         .pipe($.plumber())
         .pipe($.assemble({
             data: 'data/*.json',
@@ -64,9 +68,19 @@ gulp.task('assemble', function (cb) {
             layoutdir: 'app/templates/layouts/'
         }).on("error", gutil.log))
         .pipe($.debug({title: 'formations:'}))
-        .pipe(gulp.dest('.tmp/formations'));        
+        .pipe(gulp.dest('.tmp/formations'));
+});
 
-    return merge(formations, others);
+//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//| ✓ sitemap
+//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+gulp.task('sitemap', function () {
+    return gulp.src('.tmp/**/*.html')
+        .pipe($.debug({title: 'html:'}))
+        .pipe($.sitemap({
+            siteUrl: 'http://www.lateral-thoughts.com'
+        }))
+        .pipe(gulp.dest('dist'));
 });
 
 //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -89,9 +103,6 @@ gulp.task('html', ['styles', 'scripts', 'assemble'], function () {
     var assets = $.useref.assets({searchPath: '{.tmp,app}'})
 
     return gulp.src('.tmp/**/*.html')
-        .pipe($.sitemap({
-            siteUrl: 'http://www.lateral-thoughts.com'
-         }))
         .pipe($.plumber())
         .pipe(assets)
         .pipe($.if('*.js', $.uglify()))
@@ -193,7 +204,7 @@ gulp.task('watch', ['serve'], function () {
         'app/scripts/**/*.js',
         'app/images/**/*',
         'app/css/**/*.*',
-        'app/js/**/*.*',
+        'app/js/**/*.*'
     ]).on('change', function (file) {
         server.changed(file.path);
     });
@@ -242,7 +253,9 @@ gulp.task('serve', ['connect', 'styles', 'assemble'], function () {
 //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //| ✓ Macro tasks
 //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-gulp.task('build', ['images', 'fonts', 'extras', 'html']);
+gulp.task('build', ['images', 'fonts', 'extras', 'html'], function() {
+    gulp.start('sitemap');
+});
 
 
 //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
