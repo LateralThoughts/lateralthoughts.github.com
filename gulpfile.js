@@ -10,7 +10,6 @@ var $     = require('gulp-load-plugins')(),
     gutil = require('gulp-load-utils')(['log']),
     _     = { app: 'app', dist: 'dist' };
 
-
 //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //| ✓ styles
 //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -72,6 +71,15 @@ gulp.task('formations', function (cb) {
 });
 
 //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//| ✓ jekyll
+//'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+gulp.task('jekyll', $.shell.task([
+		  'jekyll build -s blog -d .tmp/blog'
+		])
+);
+
+
+//|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //| ✓ sitemap
 //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 gulp.task('sitemap', function () {
@@ -99,7 +107,7 @@ gulp.task('sitemap', function () {
 //
 // At the end of the transformation pipe, useref concatanates the result
 // following rules described by the building blocks
-gulp.task('html', ['styles', 'scripts', 'assemble'], function () {
+gulp.task('html', ['styles', 'scripts', 'assemble', 'jekyll'], function () {
     var assets = $.useref.assets({searchPath: '{.tmp,app}'})
 
     return gulp.src('.tmp/**/*.html')
@@ -213,6 +221,7 @@ gulp.task('watch', ['serve'], function () {
                 'app/templates/layouts/*.hbs',
                 'app/templates/partials/*.hbs'], ['assemble']);
     gulp.watch('app/styles/**/*.less', ['styles']);
+    gulp.watch('blog/**/*', ['jekyll']);
     gulp.watch('app/scripts/**/*.js', ['scripts']);
     gulp.watch('app/images/**/*', ['images']);
     gulp.watch('bower.json', ['wiredep']);
@@ -245,7 +254,7 @@ gulp.task('connect', function () {
         });
 });
 
-gulp.task('serve', ['connect', 'styles', 'assemble'], function () {
+gulp.task('serve', ['connect', 'styles', 'assemble', 'jekyll'], function () {
     require('opn')('http://localhost:9000');
 });
 

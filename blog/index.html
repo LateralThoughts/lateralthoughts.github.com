@@ -1,0 +1,107 @@
+---
+layout: page
+title: Blog
+tagline: Thinking outside the box
+---
+    <div class="row">
+        <div class="col-md-8 col-lg-9">
+            {% for post in site.posts limit:10%}
+          <div class="row">
+            <div class="date col-md-2 text-center"><span><i class="fa fa-clock-o"></i> {{ post.date | date:"%Y-%m-%d" }}</span></div>
+            <div class="col-md-4 text-center">
+              {% unless post.tags == empty %}
+              <ul class="tag_box inline">
+                {% assign tags_list = post.tags %}
+                {% include JB/tags_list %}
+              </ul>
+              {% endunless %}
+            </div>
+            <div class="col-md-4 comments-heading text-center"><span><i class="fa fa-comment"></i> <a href="/blog{{post.url}}/#disqus_thread">Commentaires</a></span></div>
+
+            <div class="col-md-2 text-center">
+              <div class="authors">
+                {% for auth in post.author %}
+                {% assign author = site.authors[auth] %}
+                <p>
+                  <img class="img-circle" alt="" style="width:60px" src="{{author.img}}">
+                </p>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10 post-title">
+                <h2><a title="Lien permanent vers {{ post.title }}" href="/blog{{post.url}}/">{{ post.title }}</a></h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 post-wrapper">
+              <div class="post-content">
+                {{ post.excerpt}}<br>
+                      <a href="/blog{{ post.url }}">Lire plus...</a><br><br>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 social-buttons">
+              <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-text="{{post.title}}" data-url="{{site.production_url}}{{post.url}}/" data-lang="fr">Tweeter</a>
+              <div class="g-plusone" data-href="{{site.production_url}}{{post.url}}"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10">
+              <hr/>
+            </div>
+          </div>
+      {% endfor %}
+        </div>
+        <aside class="col-md-4 col-lg-3">
+            <div class="sidebox">
+                <div class="pages">
+                <h4>Suivez-nous</h4>
+                <ul class="social-icons pull-left">
+                  <li class="social-icon rss">
+                    <a href="/blog/atom.xml">
+                        <i class="fa fa-rss"></i>
+                    </a>
+                  </li>
+                  <li class="social-icon github">
+                    <a class="icon-github" href="https://github.com/LateralThoughts" target="_blank"></a>
+                  </li>
+                    <li class="social-icon twitter">
+                        <a class="icon-twitter" href="https://twitter.com/LateraIThoughts" target="_blank"></a>
+                    </li>
+                </ul>
+
+                <h4>Navigation</h4>
+                <ul class="nav nav-list">
+                  {% assign pages_list = site.pages %}
+                  {% assign group = 'navigation' %}
+                  {% include JB/navigation_list %}
+                </ul>
+              </div>
+            </div>
+        </aside>
+    </div>
+
+
+
+
+
+<p>
+  <a href="{{ BASE_PATH }}{{ site.JB.archive_path }}">Posts plus anciens</a>
+</p>
+
+<script>
+  {% if site.safe == false %}var disqus_developer = 1;{% endif %}
+  var disqus_shortname = '{{ site.JB.comments.disqus.short_name }}';
+  var disqus_url = '{{site.production_url}}{{page.url}}/';
+  {% if page.wordpress_id %}var disqus_identifier = '{{page.wordpress_id}} {{site.production_url}}/?p={{page.wordpress_id}}';{% endif %}
+  /* * * DON'T EDIT BELOW THIS LINE * * */
+  (function () {
+     var s = document.createElement('script'); s.async = true;
+     s.type = 'text/javascript';
+     s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+     (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+   }());
+</script>

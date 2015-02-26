@@ -1,4 +1,4 @@
-'use strict';
+'use strict'; 
 
 $('.bio-trigger').on('click', function(e) {
     var person = $(e.target).closest('.person');

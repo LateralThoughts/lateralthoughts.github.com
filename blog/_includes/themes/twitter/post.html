@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="date col-md-2"><span itemprop="datePublished" content="{{ page.date | date:"%Y-%m-%d" }}"><i class="fa fa-clock-o"></i> {{ page.date | date:"%Y-%m-%d" }}</span></div>
+  <div class="col-md-4">
+  {% unless page.tags == empty %}
+    <ul class="tag_box inline">
+      {% assign tags_list = page.tags %}
+      {% include JB/tags_list %}
+    </ul>
+  {% endunless %}
+  </div>
+  <div class="col-md-2 comments-heading"><span><i class="fa fa-comment"></i> <a href="#disqus_thread">Commentaires</a></span></div>
+  <div class="col-md-4 text-center">
+    <div class="authors">
+      <div itemprop="author" itemscope itemtype="http://schema.org/Person">
+      {% for auth in page.author %}
+      {% assign author = site.authors[auth] %}
+      <p>
+        <img itemprop="image" class="img-circle" alt="" style="width:60px" src="{{author.img}}">
+      </p>
+      <h6 itemprop="name">{{author.name}}</h6>
+      {% endfor %}
+      </div>
+    </div>
+
+  </div>
+
+
+</div>
+<br/>
+<div class="row">
+  <div class="col-md-12 post-wrapper">
+    <div class="post-content">{{ content }}</div>
+    <hr/>
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="pagination">
+      <ul class="tag_box inline">
+      {% if page.previous %}
+        <li class="prev"><a href="/blog{{ page.previous.url }}" title="{{ page.previous.title }}">&larr; Précédent</a></li>
+      {% else %}
+        <li class="prev disabled"><a>&larr; Précédent</a></li>
+      {% endif %}
+        <li><a href="{{ BASE_PATH }}{{ site.JB.archive_path }}">Archive</a></li>
+      {% if page.next %}
+        <li class="next"><a href="/blog{{ page.next.url }}" title="{{ page.next.title }}">Suivant &rarr;</a></li>
+      {% else %}
+        <li class="next disabled"><a>Suivant &rarr;</a>
+      {% endif %}
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-6 social-buttons">
+    <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-text="{{page.title}}" data-url="{{site.production_url}}{{page.url}}" data-lang="fr">Tweeter</a>
+      <div class="g-plusone" data-href="{{site.production_url}}{{page.url}}"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <hr/>
+    {% include JB/comments %}
+  </div>
+</div>
