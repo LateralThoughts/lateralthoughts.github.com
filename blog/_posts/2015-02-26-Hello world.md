@@ -49,7 +49,7 @@ Tout est transparent. C'est à dire que l'ensemble des informations est partagé
 Ca paraît bête mais la transparence est la base de tout. Sans avoir toutes les informations, il est impossible de prendre une bonne décision. Les comptes de la société sont ouverts, l'application de compta est accessible à tous, les salaires de tout le monde sont connus, les appels d'offres sont partagés etc... 
 
 Si vous assemblez les différents éléments que je viens de décrire, voici quelques situations complètement banales chez nous :
-- vous souhaitez prendre des congés, go for it, pas de validation d'un manager à receuillir. 
+- vous souhaitez prendre des congés, go for it, pas de validation d'un manager à recueillir. 
 Et c'est vous qui avez toutes les données pour savoir si c'est possible ou non. Non pas au regard d'un solde de congés dont nous n'avons rien à faire, mais au regard de la situation financière de la boite. Chacun connait exactement son compte personnel d'exploitation et sait s'il peut ou non. 
 - quand vous entrez, c'est vous qui fixez votre salaire et par la suite c'est vous qui indiquez comment il évolue. Encore une fois, vous le faites à partir des infos financières de la boite et vous savez exactement si c'est faisable ou non. Mais je vais revenir sur le salaire il y a bien plus...
 
