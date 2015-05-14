@@ -129,8 +129,13 @@ TODO: JDY, section à revoir
 
 :poop: Do not push `generated` to this branch please :poop:
 
+```bash
  $ git checkout dev
- # push your changes (not the generated ones) BEFORE, and then:
+```
+
+Push your changes (not the generated ones) BEFORE, and then:
+
+```bash
  $ ./deploy.sh
 ```
 
