@@ -147,3 +147,39 @@ Preferably edit `blog.html` as well so people can choose to subscribe to your fe
 # Pull request
 
 :exclamation: Note you MUST send a Pull Request against `dev` and not `master` branch.
+
+# Mise à jour du calendrier des formations
+
+La page à modifier est la page suivante : _app/templates/pages/formations/calendrier.hbs_, *sur la branche dev*
+
+## Ajouter une formation au calendrier des formations
+
+Pour ajouter une formation, il suffit de rajouter les sept lignes suivantes sous le mois de la formation :
+
+```html
+<tr class="training-item">
+    <td class="date">18-19</td>
+    <td><a href="/formations/formation-mongodb">MongoDB</a></td>
+    <td>2 jours</td>
+    <td>Paris</td>
+    <td class="subscribe"><a href="#form-contact">S'inscrire</a></td>
+</tr>
+```
+
+Avec :
+
+* La première cellule est le jour ou les jours (si la formation est sur plusieurs jours) du mois quand a lieu la formation
+* La deuxième cellule est l'intitulé de la formation, avec si existant un lien vers le descriptif de la formation
+* La troisième cellule est la durée de la formation
+* La quatrième cellule est le lieu de la formation
+* La cinquième cellule est le lien vers le formulaire de contact, *elle ne doit pas être modifiée* 
+
+## Ajouter un mois de formation
+
+Si le mois auquel vous voulez ajouter une formation n'est pas encore sur la page, il suffit d'ajouter avant votre formation la ligne suivante : 
+
+```html
+<tr><td colspan="5" class="month"><h4 class="title">Juin 2015</h4></td></tr>
+```
+
+Par exemple ici commence les formations du mois de Juin 2015
