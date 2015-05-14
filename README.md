@@ -150,7 +150,7 @@ Preferably edit `blog.html` as well so people can choose to subscribe to your fe
 
 # Mise à jour du calendrier des formations
 
-La page à modifier est la page suivante : _app/templates/pages/formations/calendrier.hbs_, *sur la branche dev*
+La page à modifier est la page suivante : _app/templates/pages/formations/calendrier.hbs_, **sur la branche dev**
 
 ## Ajouter une formation au calendrier des formations
 
@@ -172,7 +172,7 @@ Avec :
 * La deuxième cellule est l'intitulé de la formation, avec si existant un lien vers le descriptif de la formation
 * La troisième cellule est la durée de la formation
 * La quatrième cellule est le lieu de la formation
-* La cinquième cellule est le lien vers le formulaire de contact, *elle ne doit pas être modifiée* 
+* La cinquième cellule est le lien vers le formulaire de contact, **elle ne doit pas être modifiée** 
 
 ## Ajouter un mois de formation
 
