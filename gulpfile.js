@@ -1,5 +1,6 @@
 'use strict';
 // generated on 2014-05-27 using generator-gulp-webapp 0.1.0
+// laast update : 2016-03-16 by JDY
 var gulp = require('gulp');
 
 // load plugins
@@ -8,7 +9,14 @@ var $     = require('gulp-load-plugins')(),
     mbf   = require('main-bower-files'),
     merge = require('gulp-merge'),
     gutil = require('gulp-load-utils')(['log']),
+    browserSync = require('browser-sync').create(),
+    assemble = require('assemble'),
+    extname = require('gulp-extname'),
     _     = { app: 'app', dist: 'dist' };
+
+// Instanciate and configure assemble
+var app = assemble();
+
 
 //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //| ✓ styles
@@ -44,38 +52,24 @@ gulp.task('scripts', function () {
 //  - pages
 //  - partials
 //  - layouts
-gulp.task('assemble', ["others", "formations"]);
-
-gulp.task('others', function (cb) {
-    return gulp.src('app/templates/pages/*.hbs')
-        .pipe($.plumber())
-        .pipe($.assemble({
-            data: 'data/*.json',
-            partials: 'app/templates/partials/*.hbs',
-            layoutdir: 'app/templates/layouts/'
-        }).on("error", gutil.log))
-        .pipe($.debug({title: 'others:'}))
-        .pipe(gulp.dest('.tmp/'));        
+gulp.task('assemble', function() {
+    app.layouts('app/templates/layouts/*.hbs');
+    app.partials('app/templates/partials/*.hbs');
+    app.data('data/*.json');
+    app.pages('app/templates/pages/**/*.hbs');
+    return app.toStream('pages')
+       .pipe(app.renderFile())
+       .pipe(extname())
+       .pipe(app.dest('.tmp/'));
 });
 
-gulp.task('formations', function (cb) {
-    return gulp.src('app/templates/pages/formations/*.hbs')
-        .pipe($.plumber())
-        .pipe($.assemble({
-            data: 'data/*.json',
-            partials: 'app/templates/partials/*.hbs',
-            layoutdir: 'app/templates/layouts/'
-        }).on("error", gutil.log))
-        .pipe($.debug({title: 'formations:'}))
-        .pipe(gulp.dest('.tmp/formations'));
-});
 
 //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //| ✓ jekyll
 //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 gulp.task('jekyll', $.shell.task([
-		  'jekyll build -s blog -d .tmp/blog'
-		])
+    'jekyll build -s blog -d .tmp/blog'
+    ])
 );
 
 
@@ -108,15 +102,10 @@ gulp.task('sitemap', function () {
 // At the end of the transformation pipe, useref concatanates the result
 // following rules described by the building blocks
 gulp.task('html', ['styles', 'scripts', 'assemble', 'jekyll'], function () {
-    var assets = $.useref.assets({searchPath: '{.tmp,app}'})
-
     return gulp.src('.tmp/**/*.html')
-        .pipe($.plumber())
-        .pipe(assets)
+        .pipe($.useref({searchPath: ['.tmp', 'app']}))
         .pipe($.if('*.js', $.uglify()))
         .pipe($.if('*.css', $.csso()))
-        .pipe(assets.restore())
-        .pipe($.useref())
         .pipe($.size())
         .pipe($.debug({title: 'html:'}))
         .pipe(gulp.dest('dist'));
@@ -157,7 +146,7 @@ gulp.task('svg', function () {
 //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 gulp.task('fonts', function () {
     return gulp.src(mbf())
-        .pipe($.filter('*.{eot,svg,ttf,woff}'))
+        .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
         .pipe($.addSrc('app/fonts/**/*.{eot,svg,ttf,woff}'))
         .pipe($.flatten())
         .pipe(gulp.dest('dist/fonts'))
@@ -193,7 +182,8 @@ gulp.task('wiredep', function () {
 
     gulp.src(['app/templates/**/*.hbs'])
         .pipe(wiredep({
-            directory: 'app/bower_components'
+            directory: 'app/bower_components',
+            ignorePath: new RegExp('.+?(?=/b)|.+?(?=../b)'),
         }))
         .pipe(gulp.dest('app/templates'));
 });
@@ -239,23 +229,13 @@ gulp.task('clean', function (cb) {
 //|**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //| ✓ server
 //'~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-gulp.task('connect', function () {
-    var connect = require('connect');
-    var app = connect()
-        .use(require('connect-livereload')({ port: 35729 }))
-        .use(connect.static('app'))
-        .use(connect.static('.tmp'))
-        .use(connect.directory('.tmp'));
-
-    require('http').createServer(app)
-        .listen(9000)
-        .on('listening', function () {
-            console.log('Started connect web server on http://localhost:9000');
-        });
-});
-
-gulp.task('serve', ['connect', 'styles', 'assemble', 'jekyll'], function () {
-    require('opn')('http://localhost:9000');
+gulp.task('serve', ['styles', 'assemble', 'jekyll'], function () {
+    browserSync.init({
+        port: 9000,
+        server: {
+            baseDir: ['app', '.tmp'],
+        }
+    });
 });
 
 
