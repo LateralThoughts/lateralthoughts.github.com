@@ -1,24 +1,307 @@
----
-layout: page
-title: Les catégories
-header: Posts By Tag
-group: navigation
----
-{% include JB/setup %}
 
-{% capture site_tags %}{% for tag in site.tags %}{{ tag | first }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
-{% assign tag_words = site_tags | split:',' | sort %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>Lateral Thoughts - Les catégories</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="nV9QKl2GNEK4onISi6QyhvHxsO7U-MhzG2m-xRVlJhQ" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Les catégories">
+
+
+    <meta name="author" content="Lateral-Thoughts">
+    <meta name="twitter:site" content="@LateraIThoughts">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+
+    <link rel="stylesheet" href="/styles/vendor.css">
+
+    <link rel="stylesheet" href="/styles/main.css">
+  </head>
+
+  <body class="lt layout">
+
+    <!--[if lt IE 10]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div role="navigation" class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                    <span class="sr-only">Menu</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-logo lt-logo" href="/">
+                    <img src="/images/lt_logo_red.svg" alt="Logo">
+                </a>
+            </div>
+
+            <div class="tabs-style-underline navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/formations/calendrier">nos formations</a></li>
+                    <li><a href="/projets">nos services</a></li>
+                    <li><a href="/equipe">équipe</a></li>
+                    <li class="active"><a href="/blog/">blog</a></li>
+                    <li><a href="/vision">nos valeurs</a></li>
+                    <li>
+                    <a class="lt-contact" href="#form-contact">
+                        <div class="lt-mail-pic icon-enveloppe"></div>
+                    </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div><!-- /.nav-bar -->
+
+    <header class="wrapper presentation">
+        <div class="container">
+            <div class="catchphrase">
+                    <i class="fa fa-rss catchphrase-icon pull-right"></i>
+                    <h1 class="catchphrase-title">Les catégories</h1>
+                    
+                    <blockquote class="catchphrase-quote"></blockquote>
+                    
+            </div>
+        </div>
+    </header>
+
+    <div class="main">
+        <div class="container">
+            <div class="main-top-header"></div>
+            <ol class="breadcrumb">
+                <li><a href="/">Accueil</a></li>
+                <li class="active"><a href="/blog/">Blog</a></li>
+                
+                 <li class="active">Les catégories</li>
+                
+            </ol>
+            <main>                
+              
+
+
+    
+
+
+
 
 <ul class="tag_box inline">
-  {% assign tags_list = tag_words %}
-  {% include JB/tags_list %}
+  
+  
+
+
+  
+     
+    	<li><i class="fa fa-bookmark"></i><a href="/blog/tags.html#financement-ref">financement</a></li>
+     
+    	<li><i class="fa fa-bookmark"></i><a href="/blog/tags.html#lateralthoughts-ref">lateralthoughts</a></li>
+    
+  
+
+
+
 </ul>
 
-{% for item in (0..site.tags.size) %}{% unless forloop.last %}
-{% capture this_word %}{{ tag_words[item] | strip_newlines }}{% endcapture %}
-<h2 id="{{ this_word }}-ref">{{ this_word }}</h2>
+
+
+<h2 id="financement-ref">financement</h2>
 <ul class="posts">
-  {% assign pages_list = site.tags[this_word] %}
-  {% include JB/pages_list %}
+  
+  
+
+
+  
+    
+      
+      	
+      	<li><a href="/blog/2016/03/13/Le%20financement/">Le financement</a></li>
+      	
+      
+    
+  
+
+
+
 </ul>
-{% endunless %}{% endfor %}
+
+
+<h2 id="lateralthoughts-ref">lateralthoughts</h2>
+<ul class="posts">
+  
+  
+
+
+  
+    
+      
+      	
+      	<li><a href="/blog/2016/03/13/Le%20financement/">Le financement</a></li>
+      	
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/2015/02/26/Hello%20world/">Hello world</a></li>
+      	
+      
+    
+  
+
+
+
+</ul>
+
+
+
+
+
+            </main>
+        </div>
+    </div>
+
+
+
+    <div class="wrapper contact">
+        <div class="container">
+            <h2 id="form-contact" class="animated fadeIn wow">Contactez nous</h2>
+            <form class="contact-form" action="mailto:contact@lateral-thoughts.com" method="POST" accept-charset="utf-8" enctype="text/plain" >
+                <div class="row">
+                    <div class="col-sm-4 animated slideInLeft wow">
+                        <div class="form-group">
+                            <label for="name">Votre nom et prénom</label>
+                            <input class="form-control" type="text" id="name" name="name"
+                                   maxlength="255" title="Votre nom" data-trigger="focus" rel="tooltip"
+                                   data-placement="right" placeholder="Votre nom" required="required"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 animated fadeIn wow">
+                        <div class="form-group">
+                            <label for="email">Votre email</label>
+                            <input class="form-control" type="email" id="email" name="email"
+                                   maxlength="255" title="john@doe.com" data-trigger="focus" rel="tooltip"
+                                   data-placement="right" placeholder="john@doe.com" required="required"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 animated slideInRight wow">
+                        <div class="form-group">
+                            <label for="phone">Votre numéro de téléphone</label>
+                            <input class="form-control" type="tel" id="phone" name="phone"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group contact-message animated fadeIn wow">
+                    <label>Votre message</label>
+                    <textarea class="form-control"
+                              title="Besoin de conseil, d'aide sur un projet, de formation ou interessé par notre incubateur ?"
+                              data-trigger="focus" rows="10" data-placement="right"
+                              placeholder="Besoin de conseil, d'aide sur un projet, de formation ou interessé par notre incubateur ?"
+                              required="required" value=""></textarea>
+                </div>
+                <div class="contact-submit-wrapper animated fadeIn wow">
+                    <input id="contact-submit" class="contact-submit" type="submit">
+                    <label class="contact-submit" for="contact-submit">
+                        <div class="contact-submit-pic icon-send"></div>
+                        <span class="contact-submit-label">Envoyer</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="wrapper page-footer">
+        <div class="container">
+            <div class="float-wrapper">
+                <ul class="footer-menu">
+                    <li class="footer-menu-item logo">
+                        <a href="/">
+                            <img src="/images/lt_logo_grey.svg" alt="Logo Lateral Thoughts">
+                        </a>
+                    </li>
+                    <li class="footer-menu-item">
+                        <a href="/formations">nos formations</a>
+                    </li>
+                    <li class="footer-menu-item">
+                        <a href="/formateurs">nos formateurs</a>
+                    </li>
+                    <li class="footer-menu-item">
+                        <a href="/incubateur">incubateur</a>
+                    </li>
+                    <li class="footer-menu-item">
+                        <a href="#form-contact">task force</a>
+                    </li>
+                </ul>
+
+                <ul class="social-icons pull-right">
+                  <li class="social-icon rss">
+                    <a href="/blog/atom.xml">
+                        <i class="fa fa-rss"></i>
+                    </a>
+                  </li>                
+                    <li class="social-icon github">
+                        <a class="icon-github" href="https://github.com/LateralThoughts" target="_blank"></a>
+                    </li>
+                    <li class="social-icon twitter">
+                        <a class="icon-twitter" href="https://twitter.com/LateraIThoughts" target="_blank"></a>
+                    </li>
+                </ul>
+            </div>
+
+            <p class="copyright clearfix">&#169; 2016 Lateral Thoughts, tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-33016590-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+         })();
+    </script>    
+
+    <script src="/scripts/vendor.js"></script>
+
+    <script src="/scripts/main.js"></script>
+
+    <script src="/js/require.js" data-main="/js/main"></script>    
+
+
+    
+    <script>
+      $(document).ready(function() {
+        $("pre:not(.raw)").addClass("prettyprint");
+        prettyPrint();
+      });
+
+      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+      window.___gcfg = {lang: 'fr'};
+      (function() {
+        var po = document.createElement('script');
+        po.type = 'text/javascript';
+        po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(po, s);
+      })();
+	</script>
+    
+
+
+
+  </body>
+</html>
+

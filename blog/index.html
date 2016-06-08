@@ -1,51 +1,148 @@
----
-layout: page
-title: Blog
-tagline: Thinking outside the box
----
-    <div class="row">
-        <div class="col-md-8 col-lg-9">
-            {% for post in site.posts limit:10%}
-          <div class="row">
-            <div class="date col-md-2 text-center"><span><i class="fa fa-clock-o"></i> {{ post.date | date:"%Y-%m-%d" }}</span></div>
-            <div class="col-md-4 text-center">
-              {% unless post.tags == empty %}
-              <ul class="tag_box inline">
-                {% assign tags_list = post.tags %}
-                {% include JB/tags_list %}
-              </ul>
-              {% endunless %}
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <title>Lateral Thoughts - Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="nV9QKl2GNEK4onISi6QyhvHxsO7U-MhzG2m-xRVlJhQ" />
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Blog">
+
+
+    <meta name="author" content="Lateral-Thoughts">
+    <meta name="twitter:site" content="@LateraIThoughts">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+
+    <link rel="stylesheet" href="/styles/vendor.css">
+
+    <link rel="stylesheet" href="/styles/main.css">
+  </head>
+
+  <body class="lt layout">
+
+    <!--[if lt IE 10]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div role="navigation" class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                    <span class="sr-only">Menu</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-logo lt-logo" href="/">
+                    <img src="/images/lt_logo_red.svg" alt="Logo">
+                </a>
             </div>
-            <div class="col-md-4 comments-heading text-center"><span><i class="fa fa-comment"></i> <a href="/blog{{post.url}}/#disqus_thread">Commentaires</a></span></div>
+
+            <div class="tabs-style-underline navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/formations/calendrier">nos formations</a></li>
+                    <li><a href="/projets">nos services</a></li>
+                    <li><a href="/equipe">équipe</a></li>
+                    <li class="active"><a href="/blog/">blog</a></li>
+                    <li><a href="/vision">nos valeurs</a></li>
+                    <li>
+                    <a class="lt-contact" href="#form-contact">
+                        <div class="lt-mail-pic icon-enveloppe"></div>
+                    </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div><!-- /.nav-bar -->
+
+    <header class="wrapper presentation">
+        <div class="container">
+            <div class="catchphrase">
+                    <i class="fa fa-rss catchphrase-icon pull-right"></i>
+                    <h1 class="catchphrase-title">Blog</h1>
+                    
+                    <blockquote class="catchphrase-quote">Thinking outside the box</blockquote>
+                    
+            </div>
+        </div>
+    </header>
+
+    <div class="main">
+        <div class="container">
+            <div class="main-top-header"></div>
+            <ol class="breadcrumb">
+                <li><a href="/">Accueil</a></li>
+                <li class="active"><a href="/blog/">Blog</a></li>
+                
+            </ol>
+            <main>                
+              
+
+
+        <div class="row">
+        <div class="col-md-8 col-lg-9">
+            
+          <div class="row">
+            <div class="date col-md-2 text-center"><span><i class="fa fa-clock-o"></i> 2016-03-13</span></div>
+            <div class="col-md-4 text-center">
+              
+              <ul class="tag_box inline">
+                
+                
+
+
+  
+     
+    	<li><i class="fa fa-bookmark"></i><a href="/blog/tags.html#lateralthoughts-ref">lateralthoughts</a></li>
+     
+    	<li><i class="fa fa-bookmark"></i><a href="/blog/tags.html#financement-ref">financement</a></li>
+    
+  
+
+
+
+              </ul>
+              
+            </div>
+            <div class="col-md-4 comments-heading text-center"><span><i class="fa fa-comment"></i> <a href="/blog/2016/03/13/Le%20financement/#disqus_thread">Commentaires</a></span></div>
 
             <div class="col-md-2 text-center">
               <div class="authors">
-                {% for auth in post.author %}
-                {% assign author = site.authors[auth] %}
+                
+                
                 <p>
-                  <img class="img-circle" alt="" style="width:60px" src="{{author.img}}">
+                  <img class="img-circle" alt="" style="width:60px" src="/images/membres/hugo.jpg">
                 </p>
-                {% endfor %}
+                
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-10 post-title">
-                <h2><a title="Lien permanent vers {{ post.title }}" href="/blog{{post.url}}/">{{ post.title }}</a></h2>
+                <h2><a title="Lien permanent vers Le financement" href="/blog/2016/03/13/Le%20financement/">Le financement</a></h2>
             </div>
           </div>
           <div class="row">
             <div class="col-md-8 post-wrapper">
               <div class="post-content">
-                {{ post.excerpt}}<br>
-                      <a href="/blog{{ post.url }}">Lire plus...</a><br><br>
+                <p>Récemment j’ai eu pas mal de questions sur le financement d’une société avec salarié puisque j’avais déjà l’expérience de Lateral-Thoughts et Hopwork. 
+J’ai fait un <a href="http://www.eventuallycoding.com/index.php/les-levees-de-fond-en-startup/">article dédié sur les mécanismes de levées de fond</a> pour les startups et je vous propose ici de parler de Lateral-Thoughts.</p>
+
+<br>
+                      <a href="/blog/2016/03/13/Le%20financement">Lire plus...</a><br><br>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-8 social-buttons">
-              <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-text="{{post.title}}" data-url="{{site.production_url}}{{post.url}}/" data-lang="fr">Tweeter</a>
-              <div class="g-plusone" data-href="{{site.production_url}}{{post.url}}"></div>
+              <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-text="Le financement" data-url="http://www.lateral-thoughts.com/blog/2016/03/13/Le%20financement/" data-lang="fr">Tweeter</a>
+              <div class="g-plusone" data-href="http://www.lateral-thoughts.com/blog/2016/03/13/Le%20financement"></div>
             </div>
           </div>
           <div class="row">
@@ -53,7 +150,67 @@ tagline: Thinking outside the box
               <hr/>
             </div>
           </div>
-      {% endfor %}
+      
+          <div class="row">
+            <div class="date col-md-2 text-center"><span><i class="fa fa-clock-o"></i> 2015-02-26</span></div>
+            <div class="col-md-4 text-center">
+              
+              <ul class="tag_box inline">
+                
+                
+
+
+  
+     
+    	<li><i class="fa fa-bookmark"></i><a href="/blog/tags.html#lateralthoughts-ref">lateralthoughts</a></li>
+    
+  
+
+
+
+              </ul>
+              
+            </div>
+            <div class="col-md-4 comments-heading text-center"><span><i class="fa fa-comment"></i> <a href="/blog/2015/02/26/Hello%20world/#disqus_thread">Commentaires</a></span></div>
+
+            <div class="col-md-2 text-center">
+              <div class="authors">
+                
+                
+                <p>
+                  <img class="img-circle" alt="" style="width:60px" src="/images/membres/hugo.jpg">
+                </p>
+                
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10 post-title">
+                <h2><a title="Lien permanent vers Hello world" href="/blog/2015/02/26/Hello%20world/">Hello world</a></h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 post-wrapper">
+              <div class="post-content">
+                <p>Eh bien voilà, notre premier post de blog mais comme on n’avait pas une idée folle sur le nom, on s’est dit qu’on allait réutiliser le traditionnel Hello World connu désormais de façon inter générationnel par tous les informaticiens depuis l’an 40.</p>
+
+<br>
+                      <a href="/blog/2015/02/26/Hello%20world">Lire plus...</a><br><br>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-8 social-buttons">
+              <a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-text="Hello world" data-url="http://www.lateral-thoughts.com/blog/2015/02/26/Hello%20world/" data-lang="fr">Tweeter</a>
+              <div class="g-plusone" data-href="http://www.lateral-thoughts.com/blog/2015/02/26/Hello%20world"></div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-10">
+              <hr/>
+            </div>
+          </div>
+      
         </div>
         <aside class="col-md-4 col-lg-3">
             <div class="sidebox">
@@ -75,9 +232,59 @@ tagline: Thinking outside the box
 
                 <h4>Navigation</h4>
                 <ul class="nav nav-list">
-                  {% assign pages_list = site.pages %}
-                  {% assign group = 'navigation' %}
-                  {% include JB/navigation_list %}
+                  
+                  
+                  
+
+
+  
+    
+      
+      	
+      	<li><a href="/blog/archive.html">Les archives</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/planet.html">Les blogs de nos membres</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/blog/tags.html">Les catégories</a></li>
+      	
+      
+    
+  
+
+
+
                 </ul>
               </div>
             </div>
@@ -89,14 +296,14 @@ tagline: Thinking outside the box
 
 
 <p>
-  <a href="{{ BASE_PATH }}{{ site.JB.archive_path }}">Posts plus anciens</a>
+  <a href="/blog/archive">Posts plus anciens</a>
 </p>
 
 <script>
-  {% if site.safe == false %}var disqus_developer = 1;{% endif %}
-  var disqus_shortname = '{{ site.JB.comments.disqus.short_name }}';
-  var disqus_url = '{{site.production_url}}{{page.url}}/';
-  {% if page.wordpress_id %}var disqus_identifier = '{{page.wordpress_id}} {{site.production_url}}/?p={{page.wordpress_id}}';{% endif %}
+  var disqus_developer = 1;
+  var disqus_shortname = 'lateralthoughts';
+  var disqus_url = 'http://www.lateral-thoughts.com/blog/index.html/';
+  
   /* * * DON'T EDIT BELOW THIS LINE * * */
   (function () {
      var s = document.createElement('script'); s.async = true;
@@ -105,3 +312,148 @@ tagline: Thinking outside the box
      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
    }());
 </script>
+
+
+
+
+            </main>
+        </div>
+    </div>
+
+
+
+    <div class="wrapper contact">
+        <div class="container">
+            <h2 id="form-contact" class="animated fadeIn wow">Contactez nous</h2>
+            <form class="contact-form" action="mailto:contact@lateral-thoughts.com" method="POST" accept-charset="utf-8" enctype="text/plain" >
+                <div class="row">
+                    <div class="col-sm-4 animated slideInLeft wow">
+                        <div class="form-group">
+                            <label for="name">Votre nom et prénom</label>
+                            <input class="form-control" type="text" id="name" name="name"
+                                   maxlength="255" title="Votre nom" data-trigger="focus" rel="tooltip"
+                                   data-placement="right" placeholder="Votre nom" required="required"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 animated fadeIn wow">
+                        <div class="form-group">
+                            <label for="email">Votre email</label>
+                            <input class="form-control" type="email" id="email" name="email"
+                                   maxlength="255" title="john@doe.com" data-trigger="focus" rel="tooltip"
+                                   data-placement="right" placeholder="john@doe.com" required="required"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 animated slideInRight wow">
+                        <div class="form-group">
+                            <label for="phone">Votre numéro de téléphone</label>
+                            <input class="form-control" type="tel" id="phone" name="phone"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group contact-message animated fadeIn wow">
+                    <label>Votre message</label>
+                    <textarea class="form-control"
+                              title="Besoin de conseil, d'aide sur un projet, de formation ou interessé par notre incubateur ?"
+                              data-trigger="focus" rows="10" data-placement="right"
+                              placeholder="Besoin de conseil, d'aide sur un projet, de formation ou interessé par notre incubateur ?"
+                              required="required" value=""></textarea>
+                </div>
+                <div class="contact-submit-wrapper animated fadeIn wow">
+                    <input id="contact-submit" class="contact-submit" type="submit">
+                    <label class="contact-submit" for="contact-submit">
+                        <div class="contact-submit-pic icon-send"></div>
+                        <span class="contact-submit-label">Envoyer</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="wrapper page-footer">
+        <div class="container">
+            <div class="float-wrapper">
+                <ul class="footer-menu">
+                    <li class="footer-menu-item logo">
+                        <a href="/">
+                            <img src="/images/lt_logo_grey.svg" alt="Logo Lateral Thoughts">
+                        </a>
+                    </li>
+                    <li class="footer-menu-item">
+                        <a href="/formations">nos formations</a>
+                    </li>
+                    <li class="footer-menu-item">
+                        <a href="/formateurs">nos formateurs</a>
+                    </li>
+                    <li class="footer-menu-item">
+                        <a href="/incubateur">incubateur</a>
+                    </li>
+                    <li class="footer-menu-item">
+                        <a href="#form-contact">task force</a>
+                    </li>
+                </ul>
+
+                <ul class="social-icons pull-right">
+                  <li class="social-icon rss">
+                    <a href="/blog/atom.xml">
+                        <i class="fa fa-rss"></i>
+                    </a>
+                  </li>                
+                    <li class="social-icon github">
+                        <a class="icon-github" href="https://github.com/LateralThoughts" target="_blank"></a>
+                    </li>
+                    <li class="social-icon twitter">
+                        <a class="icon-twitter" href="https://twitter.com/LateraIThoughts" target="_blank"></a>
+                    </li>
+                </ul>
+            </div>
+
+            <p class="copyright clearfix">&#169; 2016 Lateral Thoughts, tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-33016590-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+         })();
+    </script>    
+
+    <script src="/scripts/vendor.js"></script>
+
+    <script src="/scripts/main.js"></script>
+
+    <script src="/js/require.js" data-main="/js/main"></script>    
+
+
+    
+    <script>
+      $(document).ready(function() {
+        $("pre:not(.raw)").addClass("prettyprint");
+        prettyPrint();
+      });
+
+      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+      window.___gcfg = {lang: 'fr'};
+      (function() {
+        var po = document.createElement('script');
+        po.type = 'text/javascript';
+        po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(po, s);
+      })();
+	</script>
+    
+
+
+
+  </body>
+</html>
+
